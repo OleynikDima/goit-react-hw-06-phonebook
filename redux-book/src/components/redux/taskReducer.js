@@ -8,7 +8,7 @@ const newObj = (state, action) => {
     return [...state, action.payload.contacts]
 }
 const onRemoveItem = (state, action) => {
-    return state.filter(contact => contact.id.indexOf(action.payload.itemId) === -1)
+    return state.filter(contact => contact.id !== action.payload)
 }
 const changeFilter = (state,action) => {
     return action.payload;
