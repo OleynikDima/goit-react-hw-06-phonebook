@@ -1,33 +1,32 @@
 import {combineReducers} from 'redux';
-import actionTypes from './taskActionRTypes'
+// import actionTypes from './taskActionRTypes'
+import taskAction from './taskAction';
+import {createReducer} from '@reduxjs/toolkit'
+
+
+const newObj = (state, action) => {
+    return [...state, action.payload.contacts]
+}
+const onRemoveItem = (state, action) => {
+    return state.filter(contact => contact.id.indexOf(action.payload.itemId) === -1)
+}
+const changeFilter = (state,action) => {
+    return action.payload;
+}
 
 
 
-const items = (state=[], { type, payload }) => {
-    switch(type) {
-        case actionTypes.NEW_OBJ:
-                return [...state, payload.contacts];
 
-        case actionTypes.SHOW_ALERT:
-            return 
+const items = createReducer([],{
+    [taskAction.newObj]: newObj,
+    [taskAction.onRemoveItem]: onRemoveItem,
+});
 
-        case actionTypes.REMOVE:
-                return  state.filter(contact => contact.id.indexOf(payload.itemId) === -1)
-        
-        default:
-                return state;
-    }
-};
+const filter = createReducer('', {
+    [taskAction.changeFilter]:changeFilter
+});
 
-const filter = (state = '', {type, payload }) => {
-    switch(type){
-        case actionTypes.CHANGE_FILTER:
-             return payload.filter;
-         
-             default:
-                 return state;
-    }
-};
+
 
 export default combineReducers({
     items,

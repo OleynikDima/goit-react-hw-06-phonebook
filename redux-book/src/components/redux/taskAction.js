@@ -1,17 +1,11 @@
-import actionTypes from './taskActionRTypes'
+// import actionTypes from './taskActionRTypes'
+import {createAction} from '@reduxjs/toolkit'
 const shortid = require('shortid');
 
 
-const changeFilter = filter => ({
-        type: actionTypes.CHANGE_FILTER,
-        payload:{
-            filter,
-     },
-});
-
-//add new contact in state
-const newObj = ({text,number}) => ({
-    type: actionTypes.NEW_OBJ,
+const  changeFilter = createAction('contacts/changeFilter');
+const onRemoveItem = createAction('contacts/remove');
+const newObj = createAction('contacts/addContact', ({text,number}) => ({
     payload:{
         contacts:{
             id:shortid(),
@@ -19,14 +13,7 @@ const newObj = ({text,number}) => ({
             number,
         }
     }
-})
-
-const onRemoveItem = itemId =>({
-    type:actionTypes.REMOVE,
-    payload:{
-        itemId,
-    }
-})
+}));
 
 
 export default {
