@@ -1,18 +1,29 @@
-import React from 'react'
-import Form from './Form'
-import ContactsList from './Contacts'
-import ContactFilter from './Contacts/ContactFilter'
+import React from 'react';
+import Form from './Form';
+import ContactsList from './Contacts';
+import ContactFilter from './Contacts/ContactFilter';
+import {connect} from 'react-redux';
 
 
-
-function App () {
+function App ({contacts}) {
+    console.log(contacts);
         return (
             <>
                 <Form />
-                <ContactFilter />        
+                {contacts.length > 1 && 
+                    <ContactFilter /> 
+                }       
                 <ContactsList/>
             </>
         )
     }
 
-export default App;
+
+const mapStateToProps = state => {
+    return {
+        contacts:state.contacts.items
+    }
+}
+
+
+export default connect(mapStateToProps,null)(App);

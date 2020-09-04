@@ -2,6 +2,7 @@ import {combineReducers} from 'redux';
 // import actionTypes from './taskActionRTypes'
 import taskAction from './taskAction';
 import {createReducer} from '@reduxjs/toolkit'
+import users from '../users'
 
 
 const newObj = (state, action) => {
@@ -15,9 +16,7 @@ const changeFilter = (state,action) => {
 }
 
 
-
-
-const items = createReducer([],{
+const items = createReducer(users,{
     [taskAction.newObj]: newObj,
     [taskAction.onRemoveItem]: onRemoveItem,
 });
